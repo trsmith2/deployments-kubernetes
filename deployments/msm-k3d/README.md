@@ -63,7 +63,7 @@ Bash into Client Pod
 
 ```kubectl exec -it 'CLIENT_POD_NAME' --  bash```
 
-Start Streamimg
+Start Streaming
 
 ```ffmpeg -i rtsp://IP_OF_SERVER_POD:554/mystream -c copy output.mp4```
 

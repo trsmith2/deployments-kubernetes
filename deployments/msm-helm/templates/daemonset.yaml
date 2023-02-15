@@ -2,14 +2,14 @@
 kind: DaemonSet
 apiVersion: apps/v1
 metadata:
-  name: {{ .Values.cniClusterRole}}
+  name: {{ .Values.cniClusterRole }}
   namespace: {{ .Values.nameSpace }}
   labels:
-    app: {{ .Values.cniClusterRole}}
+    app: {{ .Values.cniClusterRole }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Values.cniClusterRole}}
+      app: {{ .Values.cniClusterRole }}
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.cniClusterRole}}
+        app: {{ .Values.cniClusterRole }}
       annotations:
         # This, along with the CriticalAddonsOnly toleration below,
         # marks the pod as a critical add-on, ensuring it gets
@@ -38,7 +38,7 @@ spec:
         - effect: NoExecute
           operator: Exists
       priorityClassName: system-node-critical
-      serviceAccountName: {{ .Values.cniClusterRole}}
+      serviceAccountName: {{ .Values.cniClusterRole }}
       # Minimize downtime during a rolling upgrade or deletion; tell Kubernetes to do a "force
       # deletion": https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods.
       terminationGracePeriodSeconds: 5
@@ -63,7 +63,7 @@ spec:
             - name: CNI_NETWORK_CONFIG
               valueFrom:
                 configMapKeyRef:
-                  name: {{.Values.cniConfigMap}}
+                  name: {{ .Values.cniConfigMap }}
                   key: cni_network_config
             - name: CNI_NET_DIR
               value: /etc/cni/net.d
@@ -132,4 +132,4 @@ spec:
             - name: LOCAL_RTP_PORT
               value: "8000"
             - name: MSM_CONTROL_PLANE
-              value: "http://10.43.3.1:9000"
+              value: "http://10.96.3.1:9000"
